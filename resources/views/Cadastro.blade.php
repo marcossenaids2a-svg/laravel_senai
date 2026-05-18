@@ -34,8 +34,12 @@
 </nav>
 
 <main class="page-center">
-  <form class="form-card" id="formCadastro">
+  <form class="form-card" id="formCadastro" action="{{ route('cadastro.submit') }}" method="POST">
+    @csrf
     <h1 class="h2 text-center mb-4">Criar conta</h1>
+    @if(session('success'))
+      <div class="alert alert-success mb-3">{{ session('success') }}</div>
+    @endif
     <label class="form-label" for="nome">Nome</label>
     <input type="text" id="nome" name="nome" class="form-control mb-3" placeholder="Seu nome" required>
     <label class="form-label" for="email">Email</label>
@@ -49,11 +53,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.getElementById('formCadastro').addEventListener('submit', function (event) {
-    event.preventDefault();
-    Swal.fire({ icon: 'success', title: 'Cadastro enviado', text: 'Sua conta foi criada para teste.', confirmButtonColor: '#dc3545' });
-  });
-</script>
+<script src="{{ asset('js/cadastro.js') }}"></script>
 </body>
 </html>

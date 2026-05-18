@@ -20,7 +20,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('motos') }}">Motos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('ofertas') }}">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Servicos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Serviços</a></li>
         <li class="nav-item"><a class="nav-link active" href="{{ route('sobre') }}">Sobre</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('contato') }}">Contato</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -30,21 +30,18 @@
 </nav>
 
 <main class="container py-5">
-  <h1 class="text-center mb-4">Sobre nos</h1>
+  <h1 class="text-center mb-4">Sobre nós</h1>
   <section class="about-box p-4 p-md-5">
     <p>A <strong>MotoStore</strong> e uma loja especializada em motos esportivas, urbanas e de alta performance.</p>
-    <p>Nosso objetivo e oferecer motos de qualidade, atendimento rapido e bons precos para cada cliente.</p>
+    <p>Nosso objetivo e oferecer motos de qualidade, atendimento rápido e bons preços para cada cliente.</p>
     <p>Trabalhamos com marcas como Yamaha, Honda, Kawasaki, BMW, Suzuki e Ducati.</p>
-    <button class="btn btn-danger mt-3" id="btnHistoria">Ver nossa historia</button>
+    <button class="btn btn-danger mt-3" id="btnHistoria">Ver nossa história</button>
   </section>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  document.getElementById('btnHistoria').addEventListener('click', function () {
-    Swal.fire({ icon: 'info', title: 'Nossa historia', text: 'A Relampago Marquinhos nasceu da paixao por motos e atendimento direto ao cliente.', confirmButtonColor: '#dc3545' });
-  });
 </script>
 </body>
 </html>

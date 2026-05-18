@@ -24,7 +24,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('motos') }}">Motos</a></li>
         <li class="nav-item"><a class="nav-link active" href="{{ route('ofertas') }}">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Servicos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Serviços</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('contato') }}">Contato</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -34,7 +34,7 @@
 </nav>
 
 <main class="container py-5">
-  <h1 class="text-center mb-4">Promocoes da semana</h1>
+  <h1 class="text-center mb-4">Promoções da semana</h1>
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card offer-card">
@@ -76,12 +76,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.querySelectorAll('.btn-oferta').forEach(function (botao) {
-    botao.addEventListener('click', function () {
-      Swal.fire({ icon: 'success', title: 'Oferta selecionada', text: botao.dataset.moto + ' foi adicionada ao atendimento.', confirmButtonColor: '#dc3545' });
-    });
-  });
-</script>
+<script src="/js/ofertas.js"></script>
 </body>
 </html>

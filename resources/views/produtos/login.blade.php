@@ -35,8 +35,12 @@
 </nav>
 
 <main class="page-center">
-  <form class="login-card" id="formLogin">
+  <form class="login-card" id="formLogin" action="{{ route('login.submit') }}" method="POST">
+    @csrf
     <h1 class="h2 text-center mb-4">Login</h1>
+    @if(session('success'))
+      <div class="alert alert-success mb-3">{{ session('success') }}</div>
+    @endif
 
     <label class="form-label" for="email">Email</label>
     <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Seu email" required>
@@ -58,11 +62,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.getElementById('formLogin').addEventListener('submit', function (event) {
-    event.preventDefault();
-    Swal.fire({ icon: 'success', title: 'Login enviado', text: 'O formulario esta funcionando.', confirmButtonColor: '#dc3545' });
-  });
-</script>
+<script src="/js/cadastro.js"></script>
 </body>
 </html>

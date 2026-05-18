@@ -24,7 +24,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('motos') }}">Motos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('ofertas') }}">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Servicos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Serviços</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('contato') }}">Contato</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -34,8 +34,12 @@
 </nav>
 
 <main class="page-center">
-  <form class="form-card" id="formRecuperar">
+  <form class="form-card" id="formRecuperar" action="{{ route('esqueci-senha.submit') }}" method="POST">
+    @csrf
     <h1 class="h2 text-center mb-4">Esqueci a senha</h1>
+    @if(session('success'))
+      <div class="alert alert-success mb-3">{{ session('success') }}</div>
+    @endif
     <label class="form-label" for="email">Email</label>
     <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Digite seu email" required>
     <button class="btn btn-danger w-100 mb-2" type="submit">Enviar</button>
@@ -45,11 +49,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.getElementById('formRecuperar').addEventListener('submit', function (event) {
-    event.preventDefault();
-    Swal.fire({ icon: 'success', title: 'Email enviado', text: 'Confira sua caixa de entrada.', confirmButtonColor: '#dc3545' });
-  });
-</script>
+<script src="/EsqueciSenha.js"></script>
 </body>
 </html>

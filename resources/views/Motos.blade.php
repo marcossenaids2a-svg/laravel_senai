@@ -41,7 +41,7 @@
 <section class="hero">
   <div class="container">
     <h1>A moto dos seus sonhos esta aqui</h1>
-    <p class="lead">As melhores motos com os melhores precos.</p>
+    <p class="lead">As melhores motos com os melhores preços.</p>
     <a href="{{ route('ofertas') }}" class="btn btn-danger btn-lg">Ver ofertas</a>
   </div>
 </section>
@@ -97,12 +97,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.querySelectorAll('.btn-comprar').forEach(function (botao) {
-    botao.addEventListener('click', function () {
-      Swal.fire({ icon: 'success', title: 'Pedido iniciado', text: 'Voce escolheu ' + botao.dataset.moto + '.', confirmButtonColor: '#dc3545' });
-    });
-  });
-</script>
+<script src="/js/motos.js"></script>
 </body>
 </html>
