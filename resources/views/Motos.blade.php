@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motos - Relampago Marquinhos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.principal')
+@section('title', 'Motos - Relampago Marquinhos')
+
+@push('styles')
   <style>
     body { background: #f5f6f8; }
     .hero { min-height: 380px; display: flex; align-items: center; color: #fff; background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('https://cdn.motor1.com/images/mgl/zxq016/s3/honda-antecipa-mudancas-da-nova-cg-160-2025.jpg') center/cover; }
@@ -16,28 +13,9 @@
     .galeria img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
     footer { background: #000; color: #fff; text-align: center; padding: 18px; }
   </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-black">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="{{ route('inicio') }}">Relampago Marquinhos</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Abrir menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="{{ route('inicio') }}">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('motos') }}">Motos</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('ofertas') }}">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Servicos</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('contato') }}">Contato</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+@endpush
 
+@section('content')
 <section class="hero">
   <div class="container">
     <h1>A moto dos seus sonhos esta aqui</h1>
@@ -82,7 +60,8 @@
   </div>
 </section>
 
-<section class="promo">Promocoes da semana com ate 20% OFF</section>
+
+<section class="promo">Promoções da semana com até 20% OFF</section>
 
 <section class="container py-5">
   <h2 class="text-center mb-4">Fotos de clientes</h2>
@@ -94,9 +73,9 @@
 </section>
 
 <footer>2026 MotoStore - Todos os direitos reservados</footer>
+@endsection
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/js/motos.js"></script>
-</body>
-</html>
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/motos.js"></script>
+@endpush

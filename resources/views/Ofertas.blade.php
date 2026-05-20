@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ofertas - Relampago Marquinhos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.principal')
+@section('title', 'Ofertas - Relampago Marquinhos')
+
+@push('styles')
   <style>
     body { background: #f5f6f8; }
     .offer-card { height: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 24px rgba(0,0,0,.08); }
@@ -13,28 +10,11 @@
     .new-price { color: #dc3545; font-size: 1.35rem; font-weight: 800; }
     footer { background: #000; color: #fff; text-align: center; padding: 18px; margin-top: 40px; }
   </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-black">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="{{ route('inicio') }}">Relampago Marquinhos</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('motos') }}">Motos</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ route('ofertas') }}">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('servicos') }}">Serviços</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('contato') }}">Contato</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+@endpush
 
+@section('content')
 <main class="container py-5">
-  <h1 class="text-center mb-4">Promoções da semana</h1>
+  <h1 class="text-center mb-4">Promocoes da semana</h1>
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card offer-card">
@@ -73,9 +53,9 @@
 </main>
 
 <footer>2026 MotoStore</footer>
+@endsection
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/js/ofertas.js"></script>
-</body>
-</html>
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/ofertas.js"></script>
+@endpush

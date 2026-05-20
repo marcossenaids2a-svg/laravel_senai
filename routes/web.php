@@ -4,8 +4,11 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 
-Route::get('/cadastro-produto', [ProdutoController::class, 'index'])->name('cadastro-produto');
-Route::post('/cadastro-produto', [ProdutoController::class, 'store'])->name('cadastro-produto.store');
+Route::get('/cadastro_produto', [ProdutoController::class, 'index'])->name('cadastro-produto');
+Route::post('/cadastro_produto', [ProdutoController::class, 'store'])->name('cadastro-produto.store');
+Route::get('/cadastro2', [ProdutoController::class, 'cadastro2'])->name('cadastro-2');
+Route::get('/cadastro-produto', fn () => redirect()->route('cadastro-produto'));
+Route::get('/cadastro_2', fn () => redirect()->route('cadastro-2'));
 Route::get('/', [TestController::class, 'login']);
 Route::get('/login', [TestController::class, 'login'])->name('login');
 Route::post('/login', [TestController::class, 'loginSubmit'])->name('login.submit');
@@ -21,3 +24,4 @@ Route::get('/servicos', [TestController::class, 'servicos'])->name('servicos');
 Route::get('/contato', [TestController::class, 'contato'])->name('contato');
 Route::post('/contato', [TestController::class, 'contatoSubmit'])->name('contato.submit');
 Route::get('/sobre', [TestController::class, 'sobre'])->name('sobre');
+Route::get('/lista_produto', [ProdutoController::class, 'lista_produto'])->name('listar-produto');
