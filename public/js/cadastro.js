@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('formCadastro');
+$(document).ready(function () {
+  var $form = $('#formCadastro');
 
-  if (!form) {
+  if (!$form.length) {
     return;
   }
 
-  form.addEventListener('submit', function () {
+  $form.on('submit', function () {
     Swal.fire({
       icon: 'success',
       title: 'Cadastro enviado',

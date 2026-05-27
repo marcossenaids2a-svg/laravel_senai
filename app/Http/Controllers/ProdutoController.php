@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotoCheckout;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -9,12 +10,85 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return view('cadastro_produto2.CADASTRO');
+        return view('produtos.cadastro');
     }
 
-    public function cadastro2()
+    public function cadastro2(Request $request)
     {
-        return view('cadastro_produto2.CADASTRO');
+        $motoSelecionada = $request->query('moto');
+        $precoSelecionado = $request->query('preco');
+
+        return view('cadastro_produto2.CADASTRO', compact('motoSelecionada', 'precoSelecionado'));
+    }
+
+    public function storeCheckout(Request $request)
+    {
+        $dados = $request->validate([
+            'moto_nome' => 'required|string|max:255',
+            'moto_preco' => 'nullable|numeric|min:0',
+            'nome_completo' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'telefone' => 'required|string|max:30',
+            'tipo_documento' => 'required|in:cpf,cnpj',
+            'documento' => 'required|string|max:18',
+            'precisa_entrega' => 'nullable|boolean',
+            'cep' => ['required_if:precisa_entrega,1', 'nullable', 'regex:/^\d{5}-?\d{3}$/'],
+            'endereco' => 'required_if:precisa_entrega,1|nullable|string|max:255',
+            'numero' => 'required_if:precisa_entrega,1|nullable|string|max:20',
+            'complemento' => 'nullable|string|max:255',
+            'bairro' => 'required_if:precisa_entrega,1|nullable|string|max:255',
+            'cidade' => 'required_if:precisa_entrega,1|nullable|string|max:255',
+            'estado' => 'required_if:precisa_entrega,1|nullable|string|size:2',
+        ], [
+            'cep.required_if' => 'Informe o CEP para entrega.',
+            'cep.regex' => 'Informe um CEP valido no formato 00000-000.',
+            'endereco.required_if' => 'Informe o endereco para entrega.',
+            'numero.required_if' => 'Informe o numero do endereco.',
+            'bairro.required_if' => 'Informe o bairro para entrega.',
+            'cidade.required_if' => 'Informe a cidade para entrega.',
+            'estado.required_if' => 'Informe o estado para entrega.',
+        ]);
+
+        $dados['precisa_entrega'] = $request->boolean('precisa_entrega');
+        $dados['tipo_documento'] = strtolower($dados['tipo_documento']);
+        $dados['documento'] = preg_replace('/\D/', '', $dados['documento']);
+        $dados['telefone'] = preg_replace('/\D/', '', $dados['telefone']);
+
+        if (!empty($dados['cep'])) {
+            $dados['cep'] = preg_replace('/\D/', '', $dados['cep']);
+        }
+
+        if (!empty($dados['estado'])) {
+            $dados['estado'] = strtoupper($dados['estado']);
+        }
+
+        if ($dados['tipo_documento'] === 'cpf' && strlen($dados['documento']) !== 11) {
+            return redirect()->back()->withErrors([
+                'documento' => 'CPF deve conter 11 numeros.',
+            ])->withInput();
+        }
+
+        if ($dados['tipo_documento'] === 'cnpj' && strlen($dados['documento']) !== 14) {
+            return redirect()->back()->withErrors([
+                'documento' => 'CNPJ deve conter 14 numeros.',
+            ])->withInput();
+        }
+
+        if (!$dados['precisa_entrega']) {
+            $dados['cep'] = null;
+            $dados['endereco'] = null;
+            $dados['numero'] = null;
+            $dados['complemento'] = null;
+            $dados['bairro'] = null;
+            $dados['cidade'] = null;
+            $dados['estado'] = null;
+        }
+
+        MotoCheckout::create($dados);
+
+        return redirect()
+            ->route('cadastro-2')
+            ->with('success', 'Checkout da moto salvo com sucesso no banco.');
     }
 
     public function store(Request $request)
@@ -43,11 +117,12 @@ class ProdutoController extends Controller
                 'success' => true,
                 'erro' => 'n',
                 'message' => 'Produto cadastrado com sucesso!',
+                'redirect' => route('listar-produto'),
             ]);
         }
 
         return redirect()
-            ->back()
+            ->route('listar-produto')
             ->with('success', 'Produto cadastrado com sucesso!');
     }
 

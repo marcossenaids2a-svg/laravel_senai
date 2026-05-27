@@ -20,9 +20,9 @@ $(document).ready(function () {
                         text: "Produto cadastrado com sucesso!",
                         icon: "success",
                         confirmButtonColor: "#198754",
+                    }).then(function () {
+                        window.location.href = data.redirect || "/lista_produto";
                     });
-
-                    $("#form-cadastro-produto")[0].reset();
                 } else {
                     Swal.fire({
                         title: "Erro!",

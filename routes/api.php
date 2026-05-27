@@ -7,5 +7,5 @@ use App\Http\Controllers\ProdutoController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::post('/cadastro_produto', [ProdutoController::class, 'store'])->name('cadastro-produto.store');
-Route::post('/salvar_produto', [ProdutoController::class, 'store']);
+Route::post('/cadastro_produto', [ProdutoController::class, 'store']);
+Route::post('/salvar_produto', [ProdutoController::class, 'store'])->name('api.salvar-produto');
