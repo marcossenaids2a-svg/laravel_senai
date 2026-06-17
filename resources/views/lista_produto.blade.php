@@ -52,7 +52,10 @@
                 <h1>Lista de Produtos</h1>
                 <p>Produtos cadastrados e salvos no banco de dados.</p>
             </div>
-            <a href="{{ route('cadastro-produto') }}" class="btn btn-success">Novo produto</a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('listar-produto') }}" class="btn btn-primary">Ver lista de produtos</a>
+                <a href="{{ route('cadastro-produto') }}" class="btn btn-success">Novo produto</a>
+            </div>
         </div>
 
         @if(session('success'))
@@ -75,6 +78,7 @@
                                 <th>Qtd</th>
                                 <th>Categoria</th>
                                 <th>Validade</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,10 +91,13 @@
                                     <td>{{ $produto->quantidade }}</td>
                                     <td>{{ $produto->categoria ?: '-' }}</td>
                                     <td>{{ $produto->data_validade ? \Carbon\Carbon::parse($produto->data_validade)->format('d/m/Y') : '-' }}</td>
+                                    <td>
+                                        <a href="{{ route('visualizar-produto', $produto->id) }}" class="btn btn-sm btn-primary">Visualizar</a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center py-4">Nenhum produto cadastrado ainda.</td>
+                                    <td colspan="8" class="text-center py-4">Nenhum produto cadastrado ainda.</td>
                                 </tr>
                             @endforelse
                         </tbody>

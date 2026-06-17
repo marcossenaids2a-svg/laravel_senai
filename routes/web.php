@@ -27,3 +27,4 @@ Route::post('/contato', [TestController::class, 'contatoSubmit'])->name('contato
 Route::get('/sobre', [TestController::class, 'sobre'])->name('sobre');
 Route::get('/lista_produto', [ProdutoController::class, 'lista_produto'])->name('listar-produto');
 Route::get('/lista_produtos', fn () => redirect()->route('listar-produto'));
+Route::get('/visualiza_produto/{id}', [ProdutoController::class, 'visualiza_produto'])->name('visualizar-produto');

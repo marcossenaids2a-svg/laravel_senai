@@ -130,6 +130,82 @@ class ProdutoController extends Controller
     {
         $produtos = Produto::orderByDesc('id')->get();
 
-        return view('lista_produto', compact('produtos'));
+        return view('lista_produto',)->with('produtos', $produtos);
+    }
+
+    public function visualiza_produto($id)
+    {
+        $produto = Produto::find($id);
+        return view('visualiza_produto')->with('produto', $produto);
+
+    }
+    public function alterar_produto(Request $request)
+    {
+        $request->validate([
+            'nome_produto' => 'required',
+            'descricao_produto' => 'nullable',
+            'preco_produto' => 'required|numeric',
+            'quantidade_produto' => 'required',
+            'tipo_produto' => 'required',
+            'produto_id' => 'required|integer',
+        ]);
+
+        try {
+            $produto = Produto::find($request->produto_id);
+
+            if ($produto) {
+                $produto->update([
+                    'nome' => $request->nome_produto,
+                    'descricao' => $request->descricao_produto,
+                    'preco' => $request->preco_produto,
+                    'quantidade' => $request->quantidade_produto,
+                    'categoria' => $request->tipo_produto,
+                ]);
+
+                return response()->json([
+                    'erro' => 'n',
+                    'msg' => 'Produto alterado com sucesso!'
+                ], 200);
+            }
+
+            return response()->json([
+                'erro' => 's',
+                'msg' => 'Produto não encontrado.'
+            ], 404);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'erro' => 's',
+                'msg' => 'Erro ao alterar produto: ' . $th->getMessage()
+            ], 500);
+        }
+    }
+    public function excluir_produto(Request $request)
+    {
+        $request->validate([
+            'produto_id' => 'required|integer',
+        ]);
+
+        try {
+            $produto = Produto::find($request->produto_id);
+
+            if ($produto) {
+                $produto->delete();
+
+                return response()->json([
+                    'erro' => 'n',
+                    'msg' => 'Produto excluído com sucesso!'
+                ], 200);
+            }
+
+            return response()->json([
+                'erro' => 's',
+                'msg' => 'Produto não encontrado.'
+            ], 404);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'erro' => 's',
+                'msg' => 'Erro ao excluir produto: ' . $th->getMessage()
+            ], 500);
+        }
     }
 }
